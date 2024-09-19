@@ -1,12 +1,12 @@
 import { ReactNode } from "react";
-import SearchbarLayout from "./components/searchbar-layout";
+import SearchbarLayout from "../components/searchbar-layout";
 import style from "./index.module.css"
-import MovieItem from "./components/movie-item";
-import fetchMovies from "./lib/fetch-movies";
-import fetchRandomMovies from "./lib/fetch-random-movies";
-import { InferGetServerSidePropsType } from "next";
+import MovieItem from "../components/movie-item";
+import fetchMovies from "../lib/fetch-movies";
+import fetchRandomMovies from "../lib/fetch-random-movies";
+import { InferGetStaticPropsType } from "next";
 
-export const getServerSideProps = async () => {
+export const getStaticProps = async () => {
   const [allMovies, recoMovies] = await Promise.all([
     fetchMovies(), 
     fetchRandomMovies(),
@@ -22,7 +22,7 @@ export const getServerSideProps = async () => {
 export default function Home({
   allMovies,
   recoMovies,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+}: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <div className={style.container}>
       <section>
